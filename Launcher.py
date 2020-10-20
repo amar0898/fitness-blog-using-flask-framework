@@ -8,7 +8,7 @@ import os
 import math
 from datetime import datetime
 
-
+basedir = os.path.abspath(os.path.dirname(__file__))
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
 
@@ -24,7 +24,8 @@ app.config.update(
     MAIL_PASSWORD=  params['gmail-password']
 )
 mail = Mail(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir,'blogdata.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate=Migrate(app,db)
@@ -40,12 +41,12 @@ class Contacts(db.Model):
 
 class Posts(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
-    slug = db.Column(db.String(21), nullable=False)
+    title = db.Column(db.String(60), nullable=False)
+    slug = db.Column(db.String(60), nullable=False)
     content = db.Column(db.String(120), nullable=False)
     tagline = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.String(12), nullable=True)
-    img_file = db.Column(db.String(12), nullable=True)
+    date = db.Column(db.String(60), nullable=True)
+    img_file = db.Column(db.String(60), nullable=True)
 
 
 @app.route("/")
@@ -178,4 +179,5 @@ def contact():
     return render_template('contact.html', params=params)
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+	app.run()
