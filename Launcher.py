@@ -141,7 +141,7 @@ def uploader():
     if ('user' in session and session['user'] == params['admin_user']):
         if (request.method == 'POST'):
             f= request.files['file']
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename) ))
+            f.save(os.path.join(app.root_path,'static/img', secure_filename(f.filename)  ))
             return redirect('/dashboard')
 
 
