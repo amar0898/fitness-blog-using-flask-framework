@@ -16,6 +16,6 @@
     "login_image": "login.png",
     "admin_user": "amar",
     "admin_password": "beast",
-    "upload_location": "C:\\Users\\parveenjat\\PycharmProjects\\blog-using-flask-project\\static\\img"
+    "upload_location": "C:\\Users\\parveenjat\\PycharmProjects\\flask-project\\static\\img"
   }
 }
