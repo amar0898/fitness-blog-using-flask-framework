@@ -14,8 +14,8 @@
     "about_text":"Health & Fitness is the fitness world’s preeminent destination for timely, high-quality information on exercise, fitness, health, and nutrition. Our audience encompasses the entire spectrum of the fitness community: consumers, aficionados, fitness professionals, and business owners. We seek to inform, educate and advocate for this community.",
     "no_of_posts": 3,
     "login_image": "login.png",
-    "admin_user": "amar",
-    "admin_password": "beast",
+    "admin_user": "example",
+    "admin_password": "example",
     "upload_location": "C:\\Users\\parveenjat\\PycharmProjects\\flask-project\\static\\img"
   }
 }
