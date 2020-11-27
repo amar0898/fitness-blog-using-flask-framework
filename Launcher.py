@@ -88,7 +88,7 @@ def about():
 @app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
 
-    if ('user' in session and session['user'] == params['admin_user']):
+    if ('user' in session and session['user'] == os.environ.get('ADMIN_USER')):
         posts = Posts.query.all()
         return render_template('dashboard.html', params=params, posts = posts)
 
@@ -96,7 +96,7 @@ def dashboard():
     if request.method=='POST':
         username = request.form.get('uname')
         userpass = request.form.get('pass')
-        if (username == params['admin_user'] and userpass == params['admin_password']):
+        if (username == os.environ.get('ADMIN_USER') and userpass == os.environ.get('ADMIN_PASSWORD')):
             #set the session variable
             session['user'] = username
             posts = Posts.query.all()
