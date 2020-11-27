@@ -14,18 +14,18 @@ with open('config.json', 'r') as c:
 
 local_server = True
 app = Flask(__name__)
-app.secret_key = 'super-secret-key'
+app.secret_key = os.environ.get('SECRET_KEY')
 app.config['UPLOAD_FOLDER'] = params['upload_location']
 app.config.update(
     MAIL_SERVER = 'smtp.gmail.com',
     MAIL_PORT = '465',
     MAIL_USE_SSL = True,
-    MAIL_USERNAME = params['gmail-user'],
-    MAIL_PASSWORD=  params['gmail-password']
+    MAIL_USERNAME = os.environ.get('GMAIL_USER'),
+    MAIL_PASSWORD=  os.environ.get('GMAIL_PASSWORD')
 )
 mail = Mail(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir,'blogdata.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
 
 db = SQLAlchemy(app)
 migrate=Migrate(app,db)
