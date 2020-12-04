@@ -173,7 +173,7 @@ def contact():
         db.session.commit()
         mail.send_message('New message from ' + name,
                           sender=email,
-                          recipients = [params['gmail-user']],
+                          recipients = [os.environ.get('GMAIL_USER')],
                           body = message + "\n" + phone
                           )
     return render_template('contact.html', params=params)
